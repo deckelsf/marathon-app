@@ -44,10 +44,15 @@ ALWAYS respond with ONLY valid JSON. No markdown, no explanation, just the JSON 
     const data = await response.json();
     const text = data.content?.[0]?.text || '';
 
-    let planData;
+ let planData;
     try {
-      // Strip any markdown fences if present
-      const clean = text.replace(/```json\n?|\n?```/g, '').trim();
+      // Strip markdown fences, leading/trailing whitespace, and any text before the first {
+      let clean = text.replace(/```json\n?|\n?```/g, '').trim();
+      const jsonStart = clean.indexOf('{');
+      const jsonEnd = clean.lastIndexOf('}');
+      if (jsonStart !== -1 && jsonEnd !== -1) {
+        clean = clean.slice(jsonStart, jsonEnd + 1);
+      }
       planData = JSON.parse(clean);
     } catch {
       return NextResponse.json({ error: 'Failed to parse plan from AI', raw: text }, { status: 500 });
