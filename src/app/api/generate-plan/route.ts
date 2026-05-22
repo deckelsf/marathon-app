@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 8000,
+        max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
         system: `You are a certified running coach with expertise in marathon training periodization. 
 You create scientifically-sound training plans using Jack Daniels' principles.
@@ -134,13 +134,11 @@ Rules:
 - dayOfWeek: 0=Sunday, 1=Monday, ... 6=Saturday
 - Include exactly 7 days per week
 - Place the long run on ${profile.preferredLongRunDay}
-- Build mileage by ~10% per week, with cutback weeks every 3-4 weeks
-- Include taper in the final 2-3 weeks (reduce volume 20-40%)
-- Race week should have very short/easy runs and the race on the final day
-- Add specific workout descriptions with pace targets for every non-rest day
-- For interval workouts include reps/sets (e.g. "6x800m at ${paces.interval}")
-- Notes field: add injury-prevention tips, nutrition reminders, or coach tips
-- Distance should be in miles (numbers only)
+- Build mileage by ~10% per week, with cutback weeks every 4 weeks
+- Include taper in the final 2 weeks
+- Keep ALL descriptions under 80 characters
+- Keep ALL notes under 60 characters or set to null
+- Distance in miles (numbers only)
 - Duration in minutes (numbers only)`;
 }
 
