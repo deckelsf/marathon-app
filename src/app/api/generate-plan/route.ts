@@ -13,12 +13,12 @@ export async function POST(req: NextRequest) {
   const profile: RunnerProfile = await req.json();
 
   // Calculate weeks
-  let totalWeeks = profile.planWeeks || 16;
+  let totalWeeks = profile.planWeeks || 8;
   if (profile.raceDate) {
     const raceDate = new Date(profile.raceDate);
     const today = new Date();
     const diffWeeks = Math.round((raceDate.getTime() - today.getTime()) / (7 * 24 * 60 * 60 * 1000));
-    totalWeeks = Math.max(8, Math.min(diffWeeks, 24));
+    totalWeeks = Math.max(4, Math.min(diffWeeks, 12));
   }
 
   const racePaces = calculatePaces(profile);
@@ -72,7 +72,7 @@ Rules:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 3000,
+        max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
         system: 'You are a marathon coach. Return ONLY valid JSON with no markdown, no explanation, no extra text. Just the raw JSON object.',
       }),
