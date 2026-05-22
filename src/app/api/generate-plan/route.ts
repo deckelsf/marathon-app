@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { RunnerProfile, TrainingPlan, TrainingWeek, Workout, WorkoutType } from '@/lib/types';
 import { calculatePaces } from '@/lib/paces';
 
+export const maxDuration = 60;
 export async function POST(req: NextRequest) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 4000,
+        max_tokens: 3000,
         messages: [{ role: 'user', content: prompt }],
         system: `You are a certified running coach with expertise in marathon training periodization. 
 You create scientifically-sound training plans using Jack Daniels' principles.

@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "src/app/api/generate-plan/route.ts": {
-      "maxDuration": 60
-    }
-  }
-}
