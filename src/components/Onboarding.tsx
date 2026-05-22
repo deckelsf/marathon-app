@@ -265,7 +265,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               <div>
                 <label className="label">Do you have a specific race? (optional)</label>
                 <input className="input" placeholder="Race name, e.g. Chicago Marathon" value={profile.raceName || ''} onChange={e => update({ raceName: e.target.value })} style={{ marginBottom: 8 }} />
-                <input className="input" type="date" value={profile.raceDate || ''} onChange={e => update({ raceDate: e.target.value })} />
+              <input className="input" type="text" placeholder="MM/DD/YYYY e.g. 11/02/2025" value={profile.raceDate || ''} onChange={e => update({ raceDate: e.target.value })} />
                 <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 6 }}>
                   If set, your plan will be reverse-engineered to peak on race day
                 </p>
